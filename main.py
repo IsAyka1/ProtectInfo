@@ -3,14 +3,19 @@ from tkinter import *
 import input_code
 import reading_file
 
-users = {}
 
-class MainClass():
+class MainClass:
+    def __init__(self, users):
+        self.users = users
+
     def __del__(self):
-        reading_file.write_to_json(users)
+        if len(self.users):
+            reading_file.write_to_json(self.users)
+
 
 def main():
-    mainClass = MainClass()
+    users = {}
+    main_class = MainClass(users)
     code = input_code.InputCode(Tk(), users)
     code.draw_widgets()
 

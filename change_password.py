@@ -4,6 +4,7 @@ from tkinter import messagebox
 
 import user_choose
 import admin_choose
+# from main import users_main
 
 
 class ChangePassword:
@@ -12,6 +13,9 @@ class ChangePassword:
         self.root.title("Изменение пароля")
         self.user = user
         self.users = users
+
+    def __del__(self):
+        users_main = self.users
 
     def draw_widgets(self):
         self.label_old_password = Label(self.root, text="Старый пароль", padx=20, pady=10)
@@ -43,6 +47,7 @@ class ChangePassword:
         self.button_back.pack()
 
     def delete_widgets(self):
+        self.users.clear()
         self.label_old_password.destroy()
         self.entry_old_password.destroy()
         self.label_new_password.destroy()
@@ -57,11 +62,11 @@ class ChangePassword:
             if new_pass_value.get() == new_pass_value2.get():
                 if self.user['is_password_limited'] != 'True':
                     messagebox.showinfo("Изменение пароля", "Пароль успешно изменен")
-                    self.user['password'] = new_pass_value2.get()
+                    self.users[self.user['login']]['password'] = new_pass_value2.get() #users[self.user['login']][password]!!!!
                     self.back()
                 elif self.check_password_limit(new_pass_value.get()):
                     messagebox.showinfo("Изменение пароля", "Пароль успешно изменен")
-                    self.user['password'] = new_pass_value2.get()
+                    self.users[self.user['login']]['password'] = new_pass_value2.get() #users[self.user['login']][\password]!!!!
                     self.back()
                     return
                 else:
@@ -80,14 +85,13 @@ class ChangePassword:
             if self.check_password_limit(self.user['password']):
                 messagebox.showinfo("Смена пароля", 'Необходимо сменить пароль учитывая ограничения')
                 return
+        tmp = self.users
         self.delete_widgets()
         if self.user['login'] == 'ADMIN':
-            value = admin_choose.AdminChoose(self.root, self.users)
-            value.draw_widgets()
+            value = admin_choose.AdminChoose(self.root, tmp)
             return
         else:
-            value = user_choose.UserChoose(self.root, self.users, self.user)
-            value.draw_widgets()
+            value = user_choose.UserChoose(self.root, tmp, self.user)
             return
 
 

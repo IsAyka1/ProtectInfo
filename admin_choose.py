@@ -1,9 +1,11 @@
 from functools import partial
 from tkinter import *
+from tkinter import messagebox
 
 import admin_change_user
 import change_password
 import input_password
+# from main import users_main
 
 
 class AdminChoose:
@@ -17,10 +19,9 @@ class AdminChoose:
         else:
             self.draw_widgets()
 
-
     def draw_widgets(self):
         self.btn_changePassword = Button(self.root, text="Изменить пароль", foreground="#ccc",
-                             padx="20", pady="8", font="16", command=partial(self.change_password, self.users['ADMIN']))
+                             padx="20", pady="8", font="16", command=self.change_password)
         self.btn_changePassword.pack()
 
         self.btn_personalList = Button(self.root, text="Список пользователей", foreground="#ccc",
@@ -42,6 +43,7 @@ class AdminChoose:
             self.delete_widgets()
         except AttributeError:
             pass
+        messagebox.showinfo("Попытка входа", "Необходимо сменить пароль")
         value = change_password.ChangePassword(self.root, self.users, self.users['ADMIN'])
         value.draw_widgets()
 

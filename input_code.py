@@ -34,7 +34,7 @@ class InputCode:
 
     def check_password(self, password):
         if decrypt(password):
-            self.users = reading_file.read_from_json()
+            self.users.update(reading_file.read_from_json())
             self.delete_widgets()
             input_pass = input_password.InputPassword(self.root, self.users)
             input_pass.draw_widgets()

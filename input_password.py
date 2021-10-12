@@ -4,6 +4,7 @@ from tkinter import *
 
 import admin_choose
 import user_choose
+# from main import users_main
 
 last_login = None
 count = 3
@@ -45,8 +46,7 @@ class InputPassword:
         global last_login, count
 
         try:
-            tmp = login_value.get()
-            user = self.users[tmp]
+            user = self.users[login_value.get()]
         except KeyError:
             messagebox.showinfo("Попытка входа", "Логин не верный")
             return
@@ -63,7 +63,7 @@ class InputPassword:
                 if self.users[login_value.get()]['is_blocked']:
                     messagebox.showerror("Попытка входа", "Вход заблокирован администратором")
                     sys.exit()
-                main_page = user_choose.UserChoose(self.root, self.users, login_value.get())
+                user_choose.UserChoose(self.root, self.users, login_value.get())
                 return
         elif last_login != login_value.get():
             last_login = login_value.get()
