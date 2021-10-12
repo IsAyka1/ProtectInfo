@@ -1,7 +1,9 @@
 from functools import partial
 from tkinter import *
 from tkinter import messagebox
-from admin_change_user import *
+
+import admin_change_user
+
 
 class CreateUser:
     def __init__(self, root, users):
@@ -35,7 +37,7 @@ class CreateUser:
     def back(self):
         self.delete_widgets()
 
-        value = AdminChangeUser(self.root, self.users)
+        value = admin_change_user.AdminChangeUser(self.root, self.users)
         value.draw_widgets()
 
     def add_user(self, value_login):
@@ -44,6 +46,6 @@ class CreateUser:
 
         messagebox.showinfo("Создание нового пользователя", "Пользователь успешно создан")
         self.delete_widgets()
-        value = AdminChangeUser(self.root, self.users)
+        value = admin_change_user.AdminChangeUser(self.root, self.users)
         value.draw_widgets(len(self.users) - 1)
 

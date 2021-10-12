@@ -1,8 +1,9 @@
 from functools import partial
 from tkinter import *
-from create_user import *
-from find_user import *
-from input_password import *
+
+import create_user
+import find_user
+import input_password
 
 class AdminChangeUser:
     def __init__(self, root, users, login_value):
@@ -110,23 +111,23 @@ class AdminChangeUser:
 
         self.users_list[login]['is_password_limited'] = value_is_password_limited.get()
         self.users_list[login]['is_blocked'] = value_is_blocked.get()
-        value = InputPassword(self.root, self.users_list)
+        value = input_password.InputPassword(self.root, self.users_list)
         value.draw_widgets()
 
     def add(self):
         self.delete_widgets()
 
-        value = CreateUser(self.root, self.users)
+        value = create_user.CreateUser(self.root, self.users)
         value.draw_widgets()
 
     def find(self):
         self.delete_widgets()
 
-        value = FindUser(self.root, self.users)
+        value = find_user.FindUser(self.root, self.users)
         value.draw_widgets()
 
     def back(self):
         self.delete_widgets()
 
-        value = InputPassword(self.root, self.users)
+        value = input_password.InputPassword(self.root, self.users)
         value.draw_widgets()

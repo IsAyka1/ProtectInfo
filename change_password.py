@@ -1,7 +1,9 @@
 from functools import partial
-from main import *
 from tkinter import *
 from tkinter import messagebox
+
+import user_choose
+import admin_choose
 
 
 class ChangePassword:
@@ -80,13 +82,15 @@ class ChangePassword:
                 return
         self.delete_widgets()
         if self.user['login'] == 'ADMIN':
-            value = AdminChoose(self.root, self.users)
+            value = admin_choose.AdminChoose(self.root, self.users)
             value.draw_widgets()
             return
         else:
-            value = UserChoose(self.root, self.users, self.user['login'])
+            value = user_choose.UserChoose(self.root, self.users, self.user)
             value.draw_widgets()
             return
+
+
     def check_password_limit(self, password):
         letters = {'letters': 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
          'digit': '1234567890',

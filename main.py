@@ -1,16 +1,17 @@
 from tkinter import *
-from input_code import *
-from reading_file import *
+
+import input_code
+import reading_file
 
 users = {}
 
 class MainClass():
     def __del__(self):
-        write_to_json(users)
+        reading_file.write_to_json(users)
 
 def main():
     mainClass = MainClass()
-    code = InputCode(Tk(), users)
+    code = input_code.InputCode(Tk(), users)
     code.draw_widgets()
 
     code.root.mainloop()

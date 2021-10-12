@@ -1,8 +1,10 @@
 from functools import partial
 from tkinter import *
-from admin_change_user import *
-from change_password import *
-from input_password import *
+
+import admin_change_user
+import change_password
+import input_password
+
 
 class AdminChoose:
     def __init__(self, root, users):
@@ -40,17 +42,17 @@ class AdminChoose:
             self.delete_widgets()
         except AttributeError:
             pass
-        value = ChangePassword(self.root, self.users, self.users['ADMIN'])
+        value = change_password.ChangePassword(self.root, self.users, self.users['ADMIN'])
         value.draw_widgets()
 
     def change_users(self):
         self.delete_widgets()
 
-        value = AdminChangeUser(self.root, self.users)
+        value = admin_change_user.AdminChangeUser(self.root, self.users)
         value.draw_widgets()
 
     def back(self):
         self.delete_widgets()
 
-        value = InputPassword(self.root, self.users)
+        value = input_password.InputPassword(self.root, self.users)
         value.draw_widgets()

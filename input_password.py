@@ -2,8 +2,8 @@ from functools import partial
 from tkinter import messagebox
 from tkinter import *
 
-from admin_choose import *
-from user_choose import *
+import admin_choose
+import user_choose
 
 last_login = None
 count = 3
@@ -56,14 +56,14 @@ class InputPassword:
             last_login = None
             if login_value.get() == 'ADMIN':
                 self.delete_widgets()
-                main_page = AdminChoose(self.root, self.users)
+                main_page = admin_choose.AdminChoose(self.root, self.users)
                 return
             else:
                 self.delete_widgets()
                 if self.users[login_value.get()]['is_blocked']:
                     messagebox.showerror("Попытка входа", "Вход заблокирован администратором")
                     sys.exit()
-                main_page = UserChoose(self.root, self.users, login_value.get())
+                main_page = user_choose.UserChoose(self.root, self.users, login_value.get())
                 return
         elif last_login != login_value.get():
             last_login = login_value.get()

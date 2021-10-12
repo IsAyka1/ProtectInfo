@@ -2,7 +2,7 @@ from functools import partial
 from tkinter import *
 from tkinter import messagebox
 
-from admin_change_user import *
+import admin_change_user
 
 
 class FindUser:
@@ -37,11 +37,11 @@ class FindUser:
     def back(self):
         self.delete_widgets()
 
-        value = AdminChangeUser(self.root, self.users)
+        value = admin_change_user.AdminChangeUser(self.root, self.users)
         value.draw_widgets()
 
     def find_user(self, value_login):
-        value = AdminChangeUser(self.root, self.users)
+        value = admin_change_user.AdminChangeUser(self.root, self.users)
         try:
             user = self.users[value_login.get()]
             users = list(self.users.values())

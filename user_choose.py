@@ -1,8 +1,9 @@
 from functools import partial
 from tkinter import *
 from tkinter import messagebox
-from change_password import *
-from input_password import *
+
+import change_password
+import input_password
 
 
 class UserChoose:
@@ -44,7 +45,7 @@ class UserChoose:
     def change_password(self):
         self.delete_widgets()
 
-        value = ChangePassword(self.root, self.users[self.login])
+        value = change_password.ChangePassword(self.root, self.users[self.login])
         value.draw_widgets()
 
     def info(self):
@@ -53,5 +54,5 @@ class UserChoose:
     def back(self):
         self.delete_widgets()
 
-        value = InputPassword(self.root, self.users)
+        value = input_password.InputPassword(self.root, self.users)
         value.draw_widgets()
