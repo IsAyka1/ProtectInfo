@@ -8,14 +8,12 @@ import admin_choose
 class AdminChangeUser:
     def __init__(self, root, users):
         self.root = root
-        self.root.geometry('600x400')
+        self.root.geometry('650x400')
         self.root.title("Список пользователей")
         self.users = users
         self.users_list = list(users.values())
         self.users_list.pop(0)
 
-    def __del__(self):
-        users_main = self.users
 
     def user_next(self):
         self.delete_widgets()
@@ -27,7 +25,7 @@ class AdminChangeUser:
     def user_before(self):
         self.delete_widgets()
         if self.id - 1 < 0:
-            self.id = 1
+            self.id = 0
         else:
             self.id -= 1
         self.draw_widgets(self.id)
@@ -44,11 +42,10 @@ class AdminChangeUser:
     def draw_widgets(self, new_id = 0):
         self.id = new_id
 
-        self.btn_before = Button(self.root, text="<", foreground="#ccc",
+        self.btn_before = Button(self.root, text="<",
                                 padx="20", pady="8", font="16",
                                 command=self.user_before)
         self.btn_before.grid(column=0, row=0)
-
 
         self.labellogin = Label(self.root, text="Логин: ", padx=20, pady=10)
         self.labellogin.grid(column=1, row=0)
@@ -57,11 +54,11 @@ class AdminChangeUser:
         self.labelblock = Label(self.root, text="Заблокирован: ", padx=20, pady=10)
         self.labelblock.grid(column=1, row=2)
 
-        self.btn_start = Button(self.root, text="В начало", foreground="#ccc",
+        self.btn_start = Button(self.root, text="В начало",
                                          padx="20", pady="8", font="16",
                                          command=self.user_start)
         self.btn_start.grid(column=0, row=2)
-        self.btn_finish = Button(self.root, text="В конец", foreground="#ccc",
+        self.btn_finish = Button(self.root, text="В конец",
                                 padx="20", pady="8", font="16",
                                 command=self.user_finish)
         self.btn_finish.grid(column=3, row=2)
@@ -87,7 +84,7 @@ class AdminChangeUser:
                                                      offvalue=0)
         self.check_is_blocked.grid(column=2, row=2)
 
-        self.btn_next = Button(self.root, text=">", foreground="#ccc",
+        self.btn_next = Button(self.root, text=">",
                                padx="20", pady="8", font="16",
                                command=self.user_next)
         self.btn_next.grid(column=3, row=0)
@@ -96,15 +93,15 @@ class AdminChangeUser:
                                padx="20", pady="8", font="16",
                                command=partial(self.save, value_is_password_limited, value_is_blocked, text_login, self.id))
         self.btn_save.grid(column=0, row=3)
-        self.btn_add = Button(self.root, text="Добавить пользователя", foreground="#ccc",
+        self.btn_add = Button(self.root, text="Добавить пользователя",
                               padx="20", pady="8", font="16",
                               command=self.add)
         self.btn_add.grid(column=1, row=3)
-        self.btn_find = Button(self.root, text="Найти пользователя", foreground="#ccc",
+        self.btn_find = Button(self.root, text="Найти пользователя",
                                padx="20", pady="8", font="16",
                                command=self.find)
         self.btn_find.grid(column=2, row=3)
-        self.btn_back = Button(self.root, text="Назад", foreground="#ccc",
+        self.btn_back = Button(self.root, text="Назад",
                                          padx="20", pady="8", font="16",
                                          command=self.back)
         self.btn_back.grid(column=3, row=3)
@@ -129,30 +126,24 @@ class AdminChangeUser:
 
     def save(self, value_is_password_limited, value_is_blocked, value_login, id = -1):
         if id != -1:
-            self.users_list[id]['is_password_limited'] = value_is_password_limited.get()
-            self.users_list[id]['is_blocked'] = value_is_blocked.get()
-            self.users[value_login.get()]['is_password_limited'] = value_is_password_limited.get()
-            self.users[value_login.get()]['is_blocked'] = value_is_blocked.get()
+            self.users_list[id]['is_password_limited'] = str(value_is_password_limited.get())
+            self.users_list[id]['is_blocked'] = str(value_is_blocked.get())
+            self.users[value_login.get()]['is_password_limited'] = str(value_is_password_limited.get())
+            self.users[value_login.get()]['is_blocked'] = str(value_is_blocked.get())
 
     def add(self):
-        tmp = self.users
-        self.users.clear()
         self.delete_widgets()
 
-        value = create_user.CreateUser(self.root, tmp)
+        value = create_user.CreateUser(self.root, self.users)
         value.draw_widgets()
 
     def find(self):
-        tmp = self.users
-        self.users.clear()
         self.delete_widgets()
 
-        value = find_user.FindUser(self.root, tmp)
+        value = find_user.FindUser(self.root, self.users)
         value.draw_widgets()
 
     def back(self):
-        tmp = self.users
-        self.users.clear()
         self.delete_widgets()
 
-        value = admin_choose.AdminChoose(self.root, tmp)
+        value = admin_choose.AdminChoose(self.root, self.users)

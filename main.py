@@ -1,5 +1,6 @@
 from tkinter import *
 
+import crypto
 import input_code
 import reading_file
 
@@ -11,6 +12,7 @@ class MainClass:
     def __del__(self):
         if len(self.users):
             reading_file.write_to_json(self.users)
+            crypto.encrypt()
 
 
 def main():

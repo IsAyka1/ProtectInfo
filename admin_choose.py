@@ -20,15 +20,15 @@ class AdminChoose:
             self.draw_widgets()
 
     def draw_widgets(self):
-        self.btn_changePassword = Button(self.root, text="Изменить пароль", foreground="#ccc",
+        self.btn_changePassword = Button(self.root, text="Изменить пароль",
                              padx="20", pady="8", font="16", command=self.change_password)
         self.btn_changePassword.pack()
 
-        self.btn_personalList = Button(self.root, text="Список пользователей", foreground="#ccc",
+        self.btn_personalList = Button(self.root, text="Список пользователей",
                              padx="20", pady="8", font="16", command=self.change_users)
         self.btn_personalList.pack()
 
-        self.btn_back = Button(self.root, text="Выход", foreground="#ccc",
+        self.btn_back = Button(self.root, text="Выход",
                              padx="20", pady="8", font="16", command=self.back)
         self.btn_back.pack()
 
@@ -43,7 +43,8 @@ class AdminChoose:
             self.delete_widgets()
         except AttributeError:
             pass
-        messagebox.showinfo("Попытка входа", "Необходимо сменить пароль")
+        if len(self.users['ADMIN']['password']) == 0:
+            messagebox.showinfo("Попытка входа", "Необходимо сменить пароль")
         value = change_password.ChangePassword(self.root, self.users, self.users['ADMIN'])
         value.draw_widgets()
 

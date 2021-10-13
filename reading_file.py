@@ -1,5 +1,8 @@
 import json
 
+import crypto
+
+
 def read_from_json():
     dict_users = {}
     with open('data.json', 'r') as json_file:
@@ -21,4 +24,5 @@ def write_to_json(users):
 
 
 if __name__ == '__main__':
-    write_to_json({'ADMIN': {"login": "ADMIN", "password": "1234", "is_password_limited": "False", "is_blocked": "False"}})
+    write_to_json({'ADMIN': {"login": "ADMIN", "password": "", "is_password_limited": "False", "is_blocked": "False"}})
+    crypto.encrypt()

@@ -14,8 +14,6 @@ class ChangePassword:
         self.user = user
         self.users = users
 
-    def __del__(self):
-        users_main = self.users
 
     def draw_widgets(self):
         self.label_old_password = Label(self.root, text="Старый пароль", padx=20, pady=10)
@@ -41,13 +39,12 @@ class ChangePassword:
                                     command=partial(self.change, old_password, new_password,
                                                     new_password2))
         self.button_change.pack()
-        self.button_back = Button(self.root, text="Назад", foreground="#ccc",
+        self.button_back = Button(self.root, text="Назад",
                                   padx="20", pady="8", font="16",
                                   command=self.draw_widgets)
         self.button_back.pack()
 
     def delete_widgets(self):
-        self.users.clear()
         self.label_old_password.destroy()
         self.entry_old_password.destroy()
         self.label_new_password.destroy()
@@ -85,13 +82,12 @@ class ChangePassword:
             if self.check_password_limit(self.user['password']):
                 messagebox.showinfo("Смена пароля", 'Необходимо сменить пароль учитывая ограничения')
                 return
-        tmp = self.users
         self.delete_widgets()
         if self.user['login'] == 'ADMIN':
-            value = admin_choose.AdminChoose(self.root, tmp)
+            value = admin_choose.AdminChoose(self.root, self.users)
             return
         else:
-            value = user_choose.UserChoose(self.root, tmp, self.user)
+            value = user_choose.UserChoose(self.root, self.users, self.user)
             return
 
 
