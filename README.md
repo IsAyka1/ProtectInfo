@@ -1,5 +1,6 @@
-## ProtectInfo
+## Protect Info
 `authentification` `registration` `db` `administration`
+
 Web app with authentification, registration, database of users, and administration
 
 ### Project Description
